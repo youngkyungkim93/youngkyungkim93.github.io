@@ -78,8 +78,7 @@
   .site-header nav a:hover { color: var(--ink); text-decoration: underline; }
 
   /* Hero */
-  .hero { padding-block: clamp(2.5rem, 7vw, 5rem) 1rem; display: grid; gap: 2.5rem; align-items: start; }
-  @media (min-width: 900px) { .hero:has(.portrait) { grid-template-columns: minmax(0, 1fr) 15rem; } }
+  .hero { padding-block: clamp(2.5rem, 7vw, 5rem) 1rem; display: grid; gap: 1.75rem 3.5rem; align-items: start; }
   .hero h1 {
     font-family: var(--serif);
     font-weight: 400;
@@ -92,7 +91,11 @@
   .bio { max-width: 38rem; }
   .bio p { margin: 0 0 1rem; }
   .contact-links { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
-  .portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; }
+  .portrait { display: block; order: -1; width: 100%; max-width: 10rem; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; border: 1px solid var(--rule); }
+  @media (min-width: 900px) {
+    .hero:has(.portrait) { grid-template-columns: minmax(0, 1fr) 16rem; }
+    .portrait { order: 0; max-width: none; margin-top: 0.5rem; }
+  }
 
   /* The chain figure */
   .chain { margin: 0; padding-block: 2.5rem 3.5rem; }
@@ -238,9 +241,7 @@
           <li><a href="cv.pdf">CV (PDF)</a></li>
         </ul>
       </div>
-      <!-- To add a photo: put photo.jpg in the repository and remove the comment marks around the next line.
-      <img class="portrait" src="photo.jpg" alt="Portrait of Young Kyung Kim">
-      -->
+      <img class="portrait" src="photo.jpg" alt="Portrait of Young Kyung Kim" width="640" height="800">
     </section>
 
     <figure class="chain" aria-labelledby="chain-caption">
@@ -293,17 +294,6 @@
       </ol>
       <figcaption id="chain-caption">A sketch of the idea behind <a href="#pub-coig">Chain-of-Image Generation</a>: instead of producing a picture in one opaque pass, the model builds it through semantic steps that a person can read, check, and change along the way. Each step’s new element is shown in gold.</figcaption>
     </figure>
-
-    <!-- Recent updates: add new items at the top. -->
-    <section class="section" aria-labelledby="h-recent">
-      <h2 id="h-recent">Recent</h2>
-      <ul class="updates">
-        <li><time datetime="2026-09">Sep 2026</time><span>Posted <a href="#pub-multiview">an evaluation framework for generating multi-view images of a person in a scene</a>, with Mahir Majid.</span></li>
-        <li><time datetime="2026-07">Jul 2026</time><span><a href="#pub-claro">CLARO</a>, led by Oded Schlesinger, appeared in Findings of ACL 2026.</span></li>
-        <li><time datetime="2026-01">Jan 2026</time><span>Posted <a href="#pub-oatta">Order-Aware Test-Time Adaptation</a> on arXiv.</span></li>
-        <li><time datetime="2025-12">Dec 2025</time><span>Posted <a href="#pub-coig">Chain-of-Image Generation</a> on arXiv.</span></li>
-      </ul>
-    </section>
 
     <section class="section" id="research" aria-labelledby="h-research">
       <h2 id="h-research">Research</h2>
