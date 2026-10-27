@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Young Kyung Kim</title>
+<meta name="description" content="Young Kyung Kim is a Ph.D. candidate at Duke University and visiting researcher at Princeton University, building interpretable and monitorable AI systems that support human oversight.">
+<meta property="og:title" content="Young Kyung Kim">
+<meta property="og:description" content="Interpretable and monitorable AI for human oversight. Ph.D. candidate at Duke, visiting researcher at Princeton.">
+<meta property="og:type" content="website">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23172238'/%3E%3Cpath d='M20 11 L5 8 L5 16 Z' fill='%23E3A12F'/%3E%3Cpath d='M19 27 L20.5 12 h4 L26 27 Z' fill='%23F1F4F6'/%3E%3Cpath d='M20 12 L22.5 8 L25 12 Z' fill='%23F1F4F6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #F1F4F6;
+    --surface: #FFFFFF;
+    --ink: #172238;
+    --muted: #556075;
+    --rule: #CDD5DE;
+    --accent: #2B50C8;
+    --glow: #D9921C;
+    --glow-soft: #F6E0B0;
+    --old: #8C96A8;
+    --old-fill: #E3E8EE;
+    --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans: "Hanken Grotesk", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --paper: #0F1522;
+      --surface: #161E2E;
+      --ink: #E5EAF2;
+      --muted: #9BA5B7;
+      --rule: #2A3446;
+      --accent: #9DB2FF;
+      --glow: #F0B44A;
+      --glow-soft: #4A3A1C;
+      --old: #6B7790;
+      --old-fill: #222C3D;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: inherit; }
+  html { background: var(--paper); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    font-kerning: normal;
+  }
+  img { max-width: 100%; height: auto; }
+
+  a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { width: 100%; max-width: 70rem; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
+
+  .skip { position: absolute; left: -999px; top: 0; }
+  .skip:focus { left: 1rem; top: 1rem; z-index: 10; background: var(--surface); padding: 0.5rem 0.75rem; }
+
+  /* Header */
+  .site-header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.75rem 2rem; padding-block: 1.75rem; }
+  .home { font-family: var(--serif); font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+  .site-header ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
+  .site-header nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+  .site-header nav a:hover { color: var(--ink); text-decoration: underline; }
+
+  /* Hero */
+  .hero { padding-block: clamp(2.5rem, 7vw, 5rem) 1rem; display: grid; gap: 2.5rem; align-items: start; }
+  @media (min-width: 900px) { .hero:has(.portrait) { grid-template-columns: minmax(0, 1fr) 15rem; } }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(3rem, 9vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.25rem;
+  }
+  .role { font-size: 1.2rem; line-height: 1.5; color: var(--muted); max-width: 36rem; margin: 0 0 1.75rem; }
+  .bio { max-width: 38rem; }
+  .bio p { margin: 0 0 1rem; }
+  .contact-links { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  .portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; }
+
+  /* The chain figure */
+  .chain { margin: 0; padding-block: 2.5rem 3.5rem; }
+  .prompt { margin: 0 0 1.25rem; font-family: var(--serif); font-style: italic; font-size: 1.2rem; }
+  .prompt span { font-family: var(--sans); font-style: normal; font-size: 0.95rem; color: var(--muted); margin-right: 0.5rem; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; }
+  .step { opacity: 0; animation: appear 0.6s ease-out forwards; animation-delay: calc(var(--i) * 260ms + 150ms); }
+  .frame { position: relative; }
+  .step:not(:last-child) .frame::after {
+    content: ""; position: absolute; top: 50%; right: -1.25rem; width: 1.25rem; height: 1px; background: var(--rule);
+  }
+  .frame svg { display: block; width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
+  .step p { margin: 0.75rem 0 0; font-size: 0.95rem; line-height: 1.45; }
+  .step .n { font-family: var(--serif); color: var(--muted); margin-right: 0.35rem; }
+  .chain figcaption { max-width: 40rem; margin-top: 1.5rem; color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+  @media (max-width: 720px) {
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .step:nth-child(2n) .frame::after { display: none; }
+  }
+  @keyframes appear { to { opacity: 1; } }
+
+  .frame use { fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .frame .old { stroke: var(--old); }
+  .frame .new { stroke: var(--glow); }
+  .frame .rocks.old { fill: var(--old-fill); }
+  .frame .rocks.new { fill: var(--glow-soft); }
+  .frame .beam, .frame .lamp, .frame .stars { stroke: none; }
+  .frame .beam.old { fill: var(--old); fill-opacity: 0.16; }
+  .frame .beam.new { fill: var(--glow); fill-opacity: 0.4; }
+  .frame .lamp.old, .frame .stars.old { fill: var(--old); }
+  .frame .lamp.new, .frame .stars.new { fill: var(--glow); }
+
+  /* Sections */
+  .section { border-top: 1px solid var(--rule); padding-block: clamp(3rem, 6vw, 4.5rem); display: grid; gap: 1.25rem 3rem; }
+  @media (min-width: 900px) { .section { grid-template-columns: 12rem minmax(0, 1fr); } }
+  .section h2 { font-family: var(--serif); font-weight: 400; font-size: 1.75rem; line-height: 1.2; margin: 0; }
+
+  .updates { list-style: none; margin: 0; padding: 0; max-width: 44rem; }
+  .updates li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 1rem; padding-block: 0.3rem; }
+  .updates time { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .topic + .topic { margin-top: 2.75rem; }
+  .topic h3 { font-family: var(--serif); font-weight: 500; font-size: 1.35rem; line-height: 1.3; margin: 0 0 0.6rem; }
+  .topic p { margin: 0 0 0.75rem; max-width: 40rem; }
+  .topic .refs { font-size: 0.95rem; color: var(--muted); margin: 0; }
+
+  .pub-note { margin: 0 0 2rem; color: var(--muted); font-size: 0.95rem; }
+  .pub-group + .pub-group { margin-top: 2.75rem; }
+  .pub-group h3 { font-size: 1rem; font-weight: 600; margin: 0 0 0.5rem; }
+  .pubs { list-style: none; margin: 0; padding: 0; }
+  .pub { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 1rem; padding-block: 0.9rem; scroll-margin-top: 1.5rem; }
+  .pub .year { color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 0.15rem; }
+  .pub .title { font-family: var(--serif); font-size: 1.2rem; line-height: 1.35; margin: 0 0 0.3rem; max-width: 44rem; }
+  .pub .title a { color: var(--ink); text-decoration-color: var(--rule); }
+  .pub .title a:hover { color: var(--accent); text-decoration-color: currentColor; }
+  .pub .authors, .pub .venue { margin: 0; font-size: 0.95rem; line-height: 1.5; color: var(--muted); max-width: 44rem; }
+  .pub .authors b { color: var(--ink); font-weight: 600; }
+  .pub .venue { margin-top: 0.15rem; }
+  .plinks { list-style: none; margin: 0.4rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; font-size: 0.95rem; }
+  .pub:target .title { color: var(--accent); }
+  @media (max-width: 560px) { .pub { grid-template-columns: 1fr; gap: 0.2rem; } }
+
+  .timeline { list-style: none; margin: 0; padding: 0; max-width: 46rem; }
+  .timeline li { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1rem; padding-block: 0.6rem; }
+  .timeline .when { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .timeline p { margin: 0; }
+  .timeline .where { color: var(--muted); }
+  @media (max-width: 560px) {
+    .timeline li, .updates li { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  .site-footer { border-top: 1px solid var(--rule); padding-block: 2.5rem 3rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; color: var(--muted); font-size: 0.95rem; }
+  .site-footer p { margin: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .step { animation: none; opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Drawing parts for the step-by-step figure. Each step reuses these shapes. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="el-sea">
+      <path d="M0 52 H120"/>
+      <path d="M8 62 h12 M30 68 h16 M6 76 h10 M24 83 h14 M44 77 h8"/>
+    </g>
+    <path id="el-rocks" d="M56 90 L60 79 L68 75 L74 67 L84 68 L92 63 L102 67 L110 75 L116 83 L120 90 Z"/>
+    <g id="el-house">
+      <path d="M84 66 L87 34 L97 34 L100 66 Z"/>
+      <path d="M85 31 h14 v3 h-14 Z"/>
+      <path d="M88 22 h8 v9 h-8 Z"/>
+      <path d="M86 22 L92 15 L98 22 Z"/>
+      <path d="M85.5 50 H98.5"/>
+      <path d="M90 66 v-6 h4 v6"/>
+    </g>
+    <path id="el-beam" d="M88 24.5 L12 11 L12 41 L88 29.5 Z"/>
+    <rect id="el-lamp" x="89.5" y="24" width="5" height="5"/>
+    <g id="el-stars">
+      <circle cx="7" cy="8" r="1.3"/>
+      <circle cx="31" cy="5" r="1.3"/>
+      <circle cx="54" cy="9" r="1.1"/>
+      <circle cx="68" cy="4" r="1.3"/>
+      <circle cx="110" cy="9" r="1.3"/>
+      <circle cx="108" cy="30" r="1.1"/>
+      <circle cx="115" cy="43" r="1.3"/>
+      <circle cx="60" cy="44" r="1.1"/>
+      <circle cx="33" cy="45" r="1.3"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header class="site-header">
+    <a class="home" href="#top">Young Kyung Kim</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="cv.pdf">CV</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div>
+        <h1>Young Kyung Kim</h1>
+        <p class="role">Ph.D. candidate in Electrical and Computer Engineering at Duke University and visiting researcher at Princeton University, advised by Guillermo Sapiro.</p>
+        <div class="bio">
+          <p>I develop interpretable and monitorable AI systems that support human oversight and advance AI alignment. My research asks what monitorability means beyond language: if we can read how a model reasons in text, can we also follow how it makes an image or a 3D scene?</p>
+          <p>I introduced Chain-of-Image Generation (CoIG), to our knowledge the first systematic framework for monitorable image generation, and I’m extending this work to 3D generation. I also study how models can learn from the order of incoming data at test time, along with interpretability, structured reasoning, and clinical research on eating disorders and mental health.</p>
+        </div>
+        <ul class="contact-links">
+          <li><a href="mailto:yk4491@princeton.edu">Email</a></li>
+          <li><a href="https://scholar.google.com/citations?user=k25vj2kAAAAJ&amp;hl=en">Google Scholar</a></li>
+          <li><a href="https://github.com/youngkyungkim93">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/youngkyungkim/">LinkedIn</a></li>
+          <li><a href="cv.pdf">CV (PDF)</a></li>
+        </ul>
+      </div>
+      <!-- To add a photo: put photo.jpg in the repository and remove the comment marks around the next line.
+      <img class="portrait" src="photo.jpg" alt="Portrait of Young Kyung Kim">
+      -->
+    </section>
+
+    <figure class="chain" aria-labelledby="chain-caption">
+      <p class="prompt"><span>Prompt</span>“A lighthouse on a rocky shore at night”</p>
+      <ol class="steps">
+        <li class="step" style="--i:0">
+          <div class="frame">
+            <svg viewBox="0 0 120 90" role="img" aria-label="Step 1: the sea and a rocky shore">
+              <use href="#el-sea" class="new"/>
+              <use href="#el-rocks" class="rocks new"/>
+            </svg>
+          </div>
+          <p><span class="n">1</span>Lay out the sea and the rocky shore</p>
+        </li>
+        <li class="step" style="--i:1">
+          <div class="frame">
+            <svg viewBox="0 0 120 90" role="img" aria-label="Step 2: a lighthouse added on the rocks">
+              <use href="#el-sea" class="old"/>
+              <use href="#el-rocks" class="rocks old"/>
+              <use href="#el-house" class="new"/>
+            </svg>
+          </div>
+          <p><span class="n">2</span>Place a lighthouse on the rocks</p>
+        </li>
+        <li class="step" style="--i:2">
+          <div class="frame">
+            <svg viewBox="0 0 120 90" role="img" aria-label="Step 3: the lamp lit, with a beam across the sky">
+              <use href="#el-sea" class="old"/>
+              <use href="#el-rocks" class="rocks old"/>
+              <use href="#el-beam" class="beam new"/>
+              <use href="#el-house" class="old"/>
+              <use href="#el-lamp" class="lamp new"/>
+            </svg>
+          </div>
+          <p><span class="n">3</span>Light the lamp and cast its beam</p>
+        </li>
+        <li class="step" style="--i:3">
+          <div class="frame">
+            <svg viewBox="0 0 120 90" role="img" aria-label="Step 4: stars added to the night sky">
+              <use href="#el-sea" class="old"/>
+              <use href="#el-rocks" class="rocks old"/>
+              <use href="#el-stars" class="stars new"/>
+              <use href="#el-beam" class="beam old"/>
+              <use href="#el-house" class="old"/>
+              <use href="#el-lamp" class="lamp old"/>
+            </svg>
+          </div>
+          <p><span class="n">4</span>Scatter stars across the sky</p>
+        </li>
+      </ol>
+      <figcaption id="chain-caption">A sketch of the idea behind <a href="#pub-coig">Chain-of-Image Generation</a>: instead of producing a picture in one opaque pass, the model builds it through semantic steps that a person can read, check, and change along the way. Each step’s new element is shown in gold.</figcaption>
+    </figure>
+
+    <!-- Recent updates: add new items at the top. -->
+    <section class="section" aria-labelledby="h-recent">
+      <h2 id="h-recent">Recent</h2>
+      <ul class="updates">
+        <li><time datetime="2026-09">Sep 2026</time><span>Posted <a href="#pub-multiview">an evaluation framework for generating multi-view images of a person in a scene</a>, with Mahir Majid.</span></li>
+        <li><time datetime="2026-07">Jul 2026</time><span><a href="#pub-claro">CLARO</a>, led by Oded Schlesinger, appeared in Findings of ACL 2026.</span></li>
+        <li><time datetime="2026-01">Jan 2026</time><span>Posted <a href="#pub-oatta">Order-Aware Test-Time Adaptation</a> on arXiv.</span></li>
+        <li><time datetime="2025-12">Dec 2025</time><span>Posted <a href="#pub-coig">Chain-of-Image Generation</a> on arXiv.</span></li>
+      </ul>
+    </section>
+
+    <section class="section" id="research" aria-labelledby="h-research">
+      <h2 id="h-research">Research</h2>
+      <div>
+        <article class="topic">
+          <h3>Monitorable generation and structured reasoning</h3>
+          <p>Chain-of-thought lets people read how a language model reaches an answer. I ask whether other kinds of generation can be made just as legible. Chain-of-Image Generation produces an image through a sequence of inspectable semantic steps, and introduces readability and causal-relevance metrics that measure how well those steps reveal and influence the final image.</p>
+          <p>With CLARO, we use reinforcement learning to make language-model reasoning more readable and efficient by optimizing its structural attributes within a token budget. I’m now extending monitorability to 3D generation, so that people can oversee and intervene in how 3D content is made.</p>
+          <p class="refs">Papers: <a href="#pub-coig">CoIG</a>, <a href="#pub-claro">CLARO</a>. 3D work in progress.</p>
+        </article>
+        <article class="topic">
+          <h3>Interpretability</h3>
+          <p>Mixtures of Neural Additive Models (MNAM) capture several statistical relationships in the same data while keeping the readable feature-response functions that make additive models interpretable. Semantic Vision Transformers (sViT) use segmentation-based image tokens tied to meaningful regions, which makes visual representations easier to interpret and more robust to distribution shift.</p>
+          <p class="refs">Papers: <a href="#pub-mnam">MNAM</a>, <a href="#pub-svit">sViT</a></p>
+        </article>
+        <article class="topic">
+          <h3>Learning from sequence order at test time</h3>
+          <p>In a stream of real data, what comes next often depends on what came before. Order-Aware Test-Time Adaptation (OATTA) learns from that order: it estimates changing class-transition probabilities online from the model’s own unlabeled predictions, then refines predictions through Bayesian filtering without updating model weights. To our knowledge, it is the first general test-time adaptation framework to exploit latent class-transition matrices.</p>
+          <p class="refs">Paper: <a href="#pub-oatta">OATTA</a></p>
+        </article>
+        <article class="topic">
+          <h3>Computational research in eating disorders and mental health</h3>
+          <p>With clinical collaborators at Duke, I apply machine learning to eating disorders and mental health. We analyzed reflections on parent feeding strategies from 19,239 adults, where natural language processing classified perceived helpfulness with 82% accuracy. I’ve also studied facial behavior during food exposures for avoidant/restrictive food intake disorder (ARFID) and co-authored research on peer support for college mental health.</p>
+          <p class="refs">Papers: <a href="#pub-parent">parent feeding strategies</a>, <a href="#pub-adventurers">repeated food exposures</a>, <a href="#pub-peer">peer support</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="publications" aria-labelledby="h-pubs">
+      <h2 id="h-pubs">Publications</h2>
+      <div>
+        <p class="pub-note">Newest first within each group. Also on <a href="https://scholar.google.com/citations?user=k25vj2kAAAAJ&amp;hl=en">Google Scholar</a>.</p>
+
+        <div class="pub-group">
+          <h3>First-author publications and preprints</h3>
+          <ul class="pubs">
+            <li class="pub" id="pub-oatta">
+              <span class="year">2026</span>
+              <div>
+                <p class="title"><a href="https://arxiv.org/abs/2601.21012">Order-Aware Test-Time Adaptation: Leveraging Temporal Dynamics for Robust Streaming Inference</a></p>
+                <p class="authors"><b>Young Kyung Kim</b>, Oded Schlesinger, Qiangqiang Wu, J. Matías Di Martino, Guillermo Sapiro</p>
+                <p class="venue"><i>arXiv preprint</i> arXiv:2601.21012</p>
+                <ul class="plinks"><li><a href="https://arxiv.org/abs/2601.21012">arXiv</a></li></ul>
+              </div>
+            </li>
+            <li class="pub" id="pub-coig">
+              <span class="year">2025</span>
+              <div>
+                <p class="title"><a href="https://arxiv.org/abs/2512.08645">Chain-of-Image Generation: Toward Monitorable and Controllable Image Generation</a></p>
+                <p class="authors"><b>Young Kyung Kim</b>, Oded Schlesinger, Yuzhou Zhao, J. Matías Di Martino, Guillermo Sapiro</p>
+                <p class="venue"><i>arXiv preprint</i> arXiv:2512.08645</p>
+                <ul class="plinks"><li><a href="https://arxiv.org/abs/2512.08645">arXiv</a></li></ul>
+              </div>
+            </li>
+            <li class="pub" id="pub-svit">
+              <span class="year">2024</span>
+              <div>
+                <p class="title"><a href="https://arxiv.org/abs/2402.17863">Vision Transformers with Natural Language Semantics</a></p>
+                <p class="authors"><b>Young Kyung Kim</b>, J. Matías Di Martino, Guillermo Sapiro</p>
+                <p class="venue"><i>arXiv preprint</i> arXiv:2402.17863</p>
+                <ul class="plinks"><li><a href="https://arxiv.org/abs/2402.17863">arXiv</a></li></ul>
+              </div>
+            </li>
+            <li class="pub" id="pub-mnam">
+              <span class="year">2024</span>
+              <div>
+                <p class="title"><a href="https://mlanthology.org/tmlr/2024/kim2024tmlr-generalizing/">Generalizing Neural Additive Models via Statistical Multimodal Analysis</a></p>
+                <p class="authors"><b>Young Kyung Kim</b>, J. Matías Di Martino, Guillermo Sapiro</p>
+                <p class="venue"><i>Transactions on Machine Learning Research</i> (TMLR)</p>
+                <ul class="plinks">
+                  <li><a href="https://mlanthology.org/tmlr/2024/kim2024tmlr-generalizing/">Paper</a></li>
+                  <li><a href="https://github.com/youngkyungkim93/MNAM">Code</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="pub" id="pub-adventurers">
+              <span class="year">2022</span>
+              <div>
+                <p class="title">A Tale of Two Food Adventurers: The Challenges and Triumphs of Repeated Food Exposures in Avoidant/Restrictive Food Intake Disorder</p>
+                <p class="authors"><b>Young Kyung Kim</b>, Juan Matías Di Martino, Julia Nicholas, Ilana Pilato, Alannah Melissa Rivera-Cancel, Julia Gianneschi, Jalisa Jackson, Ellen Vernell Mines, Nancy Zucker, Guillermo Sapiro</p>
+                <p class="venue"><i>Empowering Communities: A Participatory Approach to AI for Mental Health (PAI4MH)</i>, NeurIPS 2022 Workshop</p>
+              </div>
+            </li>
+            <li class="pub" id="pub-parent">
+              <span class="year">2022</span>
+              <div>
+                <p class="title"><a href="https://doi.org/10.1002/eat.23639">Parent strategies for expanding food variety: Reflections of 19,239 adults with symptoms of Avoidant/Restrictive Food Intake Disorder</a></p>
+                <p class="authors"><b>Young Kyung Kim</b>, J. Matías Di Martino, Julia Nicholas, Alannah Rivera-Cancel, Jennifer E. Wildes, Marsha D. Marcus, Guillermo Sapiro, Nancy Zucker</p>
+                <p class="venue"><i>International Journal of Eating Disorders</i>, 55(1):108–119</p>
+                <ul class="plinks"><li><a href="https://doi.org/10.1002/eat.23639">Paper</a></li></ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pub-group">
+          <h3>Co-authored publications and preprints</h3>
+          <ul class="pubs">
+            <li class="pub" id="pub-multiview">
+              <span class="year">2026</span>
+              <div>
+                <p class="title"><a href="https://arxiv.org/abs/2609.04603">An Evaluation Framework for Generating Multi-View Images of a Person in a Scene</a></p>
+                <p class="authors">Mahir Majid, <b>Young Kyung Kim</b>, Guillermo Sapiro</p>
+                <p class="venue"><i>arXiv preprint</i> arXiv:2609.04603</p>
+                <ul class="plinks"><li><a href="https://arxiv.org/abs/2609.04603">arXiv</a></li></ul>
+              </div>
+            </li>
+            <li class="pub" id="pub-claro">
+              <span class="year">2026</span>
+              <div>
+                <p class="title"><a href="https://aclanthology.org/2026.findings-acl.1335/">CLARO: Controlled Attribute-Driven Reasoning Optimization for Efficient Chain-of-Thought</a></p>
+                <p class="authors">Oded Schlesinger, <b>Young Kyung Kim</b>, J. Matías Di Martino, Guillermo Sapiro</p>
+                <p class="venue"><i>Findings of the Association for Computational Linguistics: ACL 2026</i>, pp. 26779–26799</p>
+                <ul class="plinks">
+                  <li><a href="https://aclanthology.org/2026.findings-acl.1335/">Paper</a></li>
+                  <li><a href="https://github.com/odedsc/CLARO">Code</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="pub" id="pub-peer">
+              <span class="year">2026</span>
+              <div>
+                <p class="title">Peer support: Current status and future opportunities for college mental health promotion</p>
+                <p class="authors">Savannah Erwin, Talita Ahmed, Jonathan Cloughesy, Kyra Citron, Faith Joo, Elizabeth Monahan, <b>Young Kyung Kim</b>, Brenda Straka, Gary Bennett, Timothy Strauman, Sarah Gaither, Guillermo Sapiro, Nancy Zucker</p>
+                <p class="venue"><i>Journal of American College Health</i>, 74(2):413–423</p>
+              </div>
+            </li>
+            <li class="pub" id="pub-fears">
+              <span class="year">2024</span>
+              <div>
+                <p class="title">Assessing Fears of Negative Consequences in Children With Symptoms of Avoidant Restrictive Food Intake Disorder</p>
+                <p class="authors">Julia R. Gianneschi, Kara A. Washington, Julia Nicholas, Ilana Pilato, Sarah LeMay-Russell, Alannah M. Rivera-Cancel, Ellen V. Mines, Jalisa E. Jackson, Samuel Marsan, Sage Lachman, <b>Young Kyung Kim</b>, J. Matías Di Martino, Jane Pendergast, Katharine L. Loeb, Debra K. Katzman, Marsha D. Marcus, Rachel Bryant-Waugh, Guillermo Sapiro, Nancy L. Zucker</p>
+                <p class="venue"><i>International Journal of Eating Disorders</i>, 57(12):2329–2340</p>
+              </div>
+            </li>
+            <li class="pub" id="pub-fbi">
+              <span class="year">2024</span>
+              <div>
+                <p class="title">Feeling and Body Investigators (FBI): An Interoceptive Exposure Treatment Approach for Young Children With Avoidant/Restrictive Food Intake Disorder (ARFID)</p>
+                <p class="authors">Kara A. Washington, Elizabeth M. Monahan, Faith Joo, Ilana Pilato, Alannah M. Rivera-Cancel, <b>Young Kyung Kim</b>, Eli Rotondo, J. Matías Di Martino, Valerie Smith, Katharine L. Loeb, Debra K. Katzman, Marsha Marcus, Rachel Bryant-Waugh, Guillermo Sapiro, Nancy Zucker</p>
+                <p class="venue">Conference abstract, <i>Journal of the American Academy of Child &amp; Adolescent Psychiatry</i>, 63(10 Suppl.):S163. Also presented as poster 1.17 at AACAP’s 2024 Annual Meeting.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="background" aria-labelledby="h-background">
+      <h2 id="h-background">Background</h2>
+      <ul class="timeline">
+        <li>
+          <span class="when">2024–present</span>
+          <p><strong>Visiting research appointment</strong>, Princeton University<br><span class="where">Electrical and Computer Engineering, Guillermo Sapiro research group</span></p>
+        </li>
+        <li>
+          <span class="when">2021–present</span>
+          <p><strong>Ph.D. candidate</strong>, Duke University<br><span class="where">Electrical and Computer Engineering. Advisor: Guillermo Sapiro</span></p>
+        </li>
+        <li>
+          <span class="when">2021–present</span>
+          <p><strong>Associate Member</strong>, Rhodes Information Initiative (Rhodes iiD)<br><span class="where">Duke University</span></p>
+        </li>
+        <li>
+          <span class="when">2021</span>
+          <p><strong>Master of Interdisciplinary Data Science</strong>, Duke University</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="mailto:yk4491@princeton.edu">yk4491@princeton.edu</a> and <a href="mailto:youngkyung.kim@duke.edu">youngkyung.kim@duke.edu</a></p>
+    <p>Updated October 2026</p>
+  </footer>
+</div>
+</body>
+</html>
